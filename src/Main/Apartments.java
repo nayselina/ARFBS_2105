@@ -20,88 +20,95 @@ public class Apartments extends JFrame {
     private JLabel priceLabel;
 
     public Apartments() {
-    	setTitle("Apartment Rental and Billing System");
-    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	setBounds(100, 100, 1440, 752);
+        setTitle("Apartment Rental and Billing System");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1440, 752);
 
-    	// Content panel setup
-    	contentPane = new JPanel();
-    	contentPane.setBackground(new Color(240, 238, 226));
-    	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-    	setContentPane(contentPane);
-    	contentPane.setLayout(null);
-    	
-    	
+        // Content panel setup
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(240, 238, 226));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 
-    	// Left sidebar panel
-    	JPanel sidebarPanel = new JPanel();
-    	sidebarPanel.setBackground(new Color(255, 255, 255));
-    	sidebarPanel.setBounds(0, 124, 251, 785);
-    	contentPane.add(sidebarPanel);
-    	sidebarPanel.setLayout(null);
+        // Left sidebar panel
+        JPanel sidebarPanel = new JPanel();
+        sidebarPanel.setBackground(new Color(255, 255, 255));
+        sidebarPanel.setBounds(0, 124, 251, 785);
+        contentPane.add(sidebarPanel);
+        sidebarPanel.setLayout(null);
 
-    	// Navigation buttons in the sidebar
-    	JButton btnDashboard = new JButton("Homepage");
-    	btnDashboard.setFont(new Font("Segoe UI", Font.BOLD, 25));
-    	btnDashboard.setBounds(0, 58, 251, 58);
-    	btnDashboard.setBackground(new Color(128, 128, 0));
-    	btnDashboard.setForeground(new Color(0, 0, 0));
-    	btnDashboard.addActionListener(new ActionListener() {
-    	    public void actionPerformed(ActionEvent e) {
-    	        dispose();
-    	        homepage homepageFrame = new homepage();
-    	        homepageFrame.setVisible(true);
-    	    }
-    	});
-    	sidebarPanel.add(btnDashboard);
+        // Navigation buttons in the sidebar
+        JButton btnDashboard = new JButton("Homepage");
+        btnDashboard.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnDashboard.setBounds(0, 58, 251, 58);
+        btnDashboard.setBackground(new Color(255, 255, 255));
+        btnDashboard.setForeground(new Color(0, 0, 0));
+        btnDashboard.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                homepage homepageFrame = new homepage();
+                homepageFrame.setVisible(true);
+            }
+        });
+        sidebarPanel.add(btnDashboard);
 
-    	JButton btnApartments = new JButton("Apartments");
-    	btnApartments.setFont(new Font("Segoe UI", Font.BOLD, 25));
-    	btnApartments.setBounds(0, 114, 251, 58);
-    	btnApartments.setBackground(new Color(128, 128, 0));
-    	btnApartments.setForeground(new Color(0, 0, 0));
-    	btnApartments.addActionListener(new ActionListener() {
-    	    public void actionPerformed(ActionEvent e) {
-    	        dispose();
-    	        Apartments apartmentsFrame = new Apartments();
-    	        apartmentsFrame.setVisible(true);
-    	    }
-    	});
-    	sidebarPanel.add(btnApartments);
+        JButton btnApartments = new JButton("Apartments");
+        btnApartments.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnApartments.setBounds(0, 114, 251, 58);
+        btnApartments.setBackground(new Color(255, 255, 255));
+        btnApartments.setForeground(new Color(0, 0, 0));
+        btnApartments.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Apartments apartmentsFrame = new Apartments();
+                apartmentsFrame.setVisible(true);
+            }
+        });
+        sidebarPanel.add(btnApartments);
 
-    	JButton btnTenants = new JButton("Tenants");
-    	btnTenants.setFont(new Font("Segoe UI", Font.BOLD, 25));
-    	btnTenants.setBounds(0, 170, 251, 58);
-    	sidebarPanel.add(btnTenants);
+        JButton btnTenants = new JButton("Tenants");
+		btnTenants.setFont(new Font("Segoe UI", Font.BOLD, 25));
+		btnTenants.setBounds(0, 170, 251, 58);
+		btnTenants.setBackground(new Color(255, 255, 255));
+		btnTenants.setForeground(new Color(0, 0, 0));
+		btnTenants.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        dispose();
+		        Tenants tenantsFrame = new Tenants();
+		        tenantsFrame.setVisible(true);
+		    }
+		});
+		sidebarPanel.add(btnTenants);
 
-    	JButton btnBilling = new JButton("Billing");
-    	btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
-    	btnBilling.setBounds(0, 226, 251, 58);
-    	sidebarPanel.add(btnBilling);
+        JButton btnBilling = new JButton("Billing");
+        btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnBilling.setBounds(0, 226, 251, 58);
+        sidebarPanel.add(btnBilling);
 
-    	JButton btnReservation = new JButton("Reservations");
-    	btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
-    	btnReservation.setBounds(0, 283, 251, 58);
-    	btnReservation.setBackground(new Color(128, 128, 0));
-    	btnReservation.setForeground(new Color(0, 0, 0));
-    	btnReservation.addActionListener(new ActionListener() {
+        JButton btnReservation = new JButton("Reservations");
+        btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnReservation.setBounds(0, 283, 251, 58);
+        btnReservation.setBackground(new Color(255, 255, 255));
+        btnReservation.setForeground(new Color(0, 0, 0));
+        btnReservation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close the current Transactions frame
                 reservation reservationFrame = new reservation(); // Open the Customers frame
                 reservationFrame.setVisible(true); // Set the Customers frame visible
             }
         });
-    	sidebarPanel.add(btnReservation);
+        sidebarPanel.add(btnReservation);
 
-    	JButton btnReports = new JButton("Reports");
-    	btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
-    	btnReports.setBounds(0, 340, 251, 58);
-    	sidebarPanel.add(btnReports);
+        JButton btnReports = new JButton("Reports");
+        btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnReports.setBounds(0, 340, 251, 58);
+        sidebarPanel.add(btnReports);
 
-    	JButton btnSettings = new JButton("Settings");
-    	btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
-    	btnSettings.setBounds(0, 396, 251, 58);
-    	sidebarPanel.add(btnSettings);
+        JButton btnSettings = new JButton("Settings");
+        btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnSettings.setBounds(0, 396, 251, 58);
+        sidebarPanel.add(btnSettings);
 
         // Top banner panel
         JPanel bannerPanel = new JPanel();
@@ -154,15 +161,18 @@ public class Apartments extends JFrame {
                 updatePriceLabel(selectedUnit);
             }
         });
-        
-      
+
         // Navigate to Reservation Panel on "Done" button click
         doneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Pass the selected unit type to the constructor of the Reservation frame
+                // Pass the selected unit type, price, and lease type to the constructor of the Reservation frame
                 String selectedUnitType = (String) unitTypeDropdown.getSelectedItem();
-                reservation reservationFrame = new reservation(selectedUnitType);
+                String selectedPrice = priceLabel.getText().replace("Price: ", "").trim();
+                String selectedLeaseType = (String) leaseTypeDropdown.getSelectedItem();
+
+                // Pass these values to the Reservation class constructor
+                reservation reservationFrame = new reservation(selectedUnitType, selectedPrice, selectedLeaseType);
                 reservationFrame.setVisible(true);
                 dispose();
             }
