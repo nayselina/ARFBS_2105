@@ -113,7 +113,7 @@ public class Apartments extends JFrame {
         // Top banner panel
         JPanel bannerPanel = new JPanel();
         bannerPanel.setBackground(new Color(183, 183, 47));
-        bannerPanel.setBounds(0, 0, 1440, 122);
+        bannerPanel.setBounds(0, 0, 1451, 122);
         contentPane.add(bannerPanel);
         bannerPanel.setLayout(null);
 
