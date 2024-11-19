@@ -1,156 +1,154 @@
 package Main;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
-import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.BorderFactory;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.JTableHeader;
 
 public class Billing extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField txtOverview;
-	private JTextField txtId;
-	private JTextField txtName;
-	private JTextField txtDate;
-	private JTextField txtAmount;
-	private JTextField txtDueDate;
-	private JTextField txtStatus;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Billing frame = new Billing();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Billing frame = new Billing();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public Billing() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1440, 752);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(240, 238, 226));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    /**
+     * Create the frame.
+     */
+    public Billing() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1440, 752);
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(240, 238, 226));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(183, 183, 47));
-		panel.setBounds(3, 0, 1440, 122);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 255, 255));
-		panel_1.setBounds(0, 124, 251, 785);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JButton btnNewButton = new JButton("Homepage");
-		btnNewButton.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnNewButton.setBounds(0, 58, 251, 58);
-		panel_1.add(btnNewButton);
-		
-		JButton btnApartment = new JButton("Apartment");
-		btnApartment.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnApartment.setBounds(0, 114, 251, 58);
-		panel_1.add(btnApartment);
-		
-		JButton btnNewButton_1 = new JButton("Tenants");
-		btnNewButton_1.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnNewButton_1.setBounds(0, 171, 251, 58);
-		panel_1.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Billing");
-		btnNewButton_2.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnNewButton_2.setBounds(0, 227, 251, 58);
-		panel_1.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Reservation");
-		btnNewButton_3.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnNewButton_3.setBounds(0, 280, 251, 58);
-		panel_1.add(btnNewButton_3);
-		
-		JButton btnNewButton_4 = new JButton("Reports");
-		btnNewButton_4.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnNewButton_4.setBounds(0, 335, 251, 58);
-		panel_1.add(btnNewButton_4);
-		
-		JButton btnNewButton_5 = new JButton("Settings");
-		btnNewButton_5.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnNewButton_5.setBounds(0, 390, 251, 58);
-		panel_1.add(btnNewButton_5);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(255, 255, 255));
-		panel_2.setBounds(333, 186, 1055, 469);
-		contentPane.add(panel_2);
-		panel_2.setLayout(null);
-		
-		txtOverview = new JTextField();
-		txtOverview.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		txtOverview.setText("  Overview");
-		txtOverview.setBounds(38, 30, 115, 31);
-		panel_2.add(txtOverview);
-		txtOverview.setColumns(10);
-		
-		txtId = new JTextField();
-		txtId.setText("  ID");
-		txtId.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		txtId.setColumns(10);
-		txtId.setBounds(62, 97, 51, 31);
-		panel_2.add(txtId);
-		
-		txtName = new JTextField();
-		txtName.setText(" Name");
-		txtName.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		txtName.setColumns(10);
-		txtName.setBounds(204, 97, 68, 31);
-		panel_2.add(txtName);
-		
-		txtDate = new JTextField();
-		txtDate.setText("  Date");
-		txtDate.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		txtDate.setColumns(10);
-		txtDate.setBounds(368, 97, 68, 31);
-		panel_2.add(txtDate);
-		
-		txtAmount = new JTextField();
-		txtAmount.setText(" Amount");
-		txtAmount.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		txtAmount.setColumns(10);
-		txtAmount.setBounds(532, 97, 90, 31);
-		panel_2.add(txtAmount);
-		
-		txtDueDate = new JTextField();
-		txtDueDate.setText(" Due Date");
-		txtDueDate.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		txtDueDate.setColumns(10);
-		txtDueDate.setBounds(704, 97, 98, 31);
-		panel_2.add(txtDueDate);
-		
-		txtStatus = new JTextField();
-		txtStatus.setText(" Status");
-		txtStatus.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		txtStatus.setColumns(10);
-		txtStatus.setBounds(894, 97, 68, 31);
-		panel_2.add(txtStatus);
-	}
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        // Sidebar panel
+        JPanel panel_1 = new JPanel();
+        panel_1.setBackground(new Color(255, 255, 255));
+        panel_1.setBounds(0, 124, 251, 785);
+        contentPane.add(panel_1);
+        panel_1.setLayout(null);
+        
+        // Sidebar buttons
+        JButton btnHomepage = new JButton("Homepage");
+        btnHomepage.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnHomepage.setBounds(0, 58, 251, 58);
+        panel_1.add(btnHomepage);
+        
+        JButton btnApartment = new JButton("Apartment");
+        btnApartment.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnApartment.setBounds(0, 114, 251, 58);
+        panel_1.add(btnApartment);
+        
+        JButton btnTenants = new JButton("Tenants");
+        btnTenants.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnTenants.setBounds(0, 171, 251, 58);
+        panel_1.add(btnTenants);
+        
+        JButton btnBilling = new JButton("Billing");
+        btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnBilling.setBounds(0, 227, 251, 58);
+        panel_1.add(btnBilling);
+        
+        JButton btnReservation = new JButton("Reservation");
+        btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnReservation.setBounds(0, 280, 251, 58);
+        panel_1.add(btnReservation);
+        
+        JButton btnReports = new JButton("Reports");
+        btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnReports.setBounds(0, 335, 251, 58);
+        panel_1.add(btnReports);
+        
+        JButton btnSettings = new JButton("Settings");
+        btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnSettings.setBounds(0, 390, 251, 58);
+        panel_1.add(btnSettings);
+        
+        // Header panel
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(new Color(183, 183, 47)); // Set header color
+        headerPanel.setBounds(0, 0, 1451, 122); // Set position and size for header
+        contentPane.add(headerPanel);
+
+        // Main panel for the table and title
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        tablePanel.setBackground(new Color(255, 255, 255)); // White background for the main content panel
+        tablePanel.setBounds(333, 186, 1055, 469); // Set position and size for the table panel
+        contentPane.add(tablePanel);
+
+        // Title label for the table section
+        JLabel titleLabel = new JLabel("Overview", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16)); // Set the font to Segoe UI
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); // Add padding to the label
+        tablePanel.add(titleLabel, BorderLayout.NORTH);
+
+        // Column names for the table
+        String[] columnNames = {"ID", "Name", "Date", "Amount", "Due Date", "Status"};
+
+        // Empty data for the table (all fields are blank)
+        Object[][] data = {
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""}
+        };
+
+        // Use DefaultTableModel to bind data to the JTable
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+
+        // Increase font size for the entire table
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 18));  // Set font size to 18
+
+        // Set row height for better appearance
+        table.setRowHeight(30);
+
+        // Adjust the font size for the table header
+        JTableHeader header = table.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.BOLD, 18)); // Set header font size
+
+        // Create a scroll pane to hold the table
+        JScrollPane scrollPane = new JScrollPane(table);
+        tablePanel.add(scrollPane, BorderLayout.CENTER); // Add the scrollPane with table to the panel
+    }
 }
