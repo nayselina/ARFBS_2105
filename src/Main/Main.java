@@ -1,40 +1,31 @@
-package Main;
-
 import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import javax.swing.border.LineBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 
 public class Main extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
+    private JTextField WELCOME;
+    private JTextField username;
+    private JPasswordField passwordField;
+    private JTextField textField;
 
     // Correct credentials
     private final String DUMMY_USERNAME = "user";
     private final String DUMMY_PASSWORD = "security123";
-
-    private JTextField WELCOME;
-    private JTextField AvaHomes;
-    private JTextField manage;
-    private JTextField simplify;
-    private JTextField username;
-    private JTextField password;
-    private JPasswordField passwordField;
-    private JTextField textField;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -50,108 +41,87 @@ public class Main extends JFrame {
     }
 
     public Main() {
-        getContentPane().setForeground(new Color(240, 238, 226));
+        // Frame settings
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1440, 752);
-
-        // Create custom panel with background image
-        contentPane = new ImagePanel(new ImageIcon("C:\\Users\\63906\\OneDrive\\Documents\\oop_project\\my_application\\src\\login\\2f849834729ff571e5594f315e809508.jpg").getImage());
-        contentPane.setBorder(new EmptyBorder(0, 5, 5, 5));
-
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(245, 245, 245)); // Soft light gray background
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-        getContentPane().setLayout(null);
+        contentPane.setLayout(null);
 
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(255, 255, 255));
-        panel.setBounds(189, 111, 1026, 542);
-        getContentPane().add(panel);
-        panel.setLayout(null);
+        // Header section
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(new Color(183, 183, 47)); // Accent color for header
+        headerPanel.setBounds(0, 0, 1440, 50);
+        contentPane.add(headerPanel);
 
-        JPanel panel_1 = new JPanel();
-        panel_1.setBackground(new Color(183, 183, 47));
-        panel_1.setBounds(0, 0, 86, 542);
-        panel.add(panel_1);
+        // Updated header text
+        JLabel headerLabel = new JLabel("Apartment and Facilities Billing System");
+        headerLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        headerLabel.setForeground(Color.WHITE);
+        headerPanel.add(headerLabel);
 
+        // Welcome text
         WELCOME = new JTextField();
-        WELCOME.setFont(new Font("Segoe UI", Font.BOLD, 30));
-        WELCOME.setText("  WELCOME");
-        WELCOME.setBounds(683, 89, 191, 53);
-        panel.add(WELCOME);
-        WELCOME.setColumns(10);
+        WELCOME.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        WELCOME.setForeground(new Color(60, 60, 60)); // Soft dark gray text
+        WELCOME.setText("Welcome to AVA HOMES");
+        WELCOME.setBounds(200, 100, 400, 50);
+        WELCOME.setHorizontalAlignment(JTextField.CENTER);
+        WELCOME.setEditable(false);
+        contentPane.add(WELCOME);
 
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\63906\\Downloads\\home-page (2).png"));
-        lblNewLabel.setBounds(145, 55, 301, 302);
-        panel.add(lblNewLabel);
+        // Center panel for login form
+        JPanel loginPanel = new JPanel();
+        loginPanel.setLayout(null);
+        loginPanel.setBounds(320, 150, 800, 350); // Centering login panel
+        contentPane.add(loginPanel);
 
-        AvaHomes = new JTextField();
-        AvaHomes.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        AvaHomes.setText("  \"Welcome to AVA HOMES - your trusted partner \r\n\r\n");
-        AvaHomes.setBounds(106, 352, 365, 48);
-        panel.add(AvaHomes);
-        AvaHomes.setColumns(10);
-
-        manage = new JTextField();
-        manage.setText("   in managing rental and facilities. Let's log in");
-        manage.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        manage.setColumns(10);
-        manage.setBounds(134, 388, 326, 42);
-        panel.add(manage);
-
-        simplify = new JTextField();
-        simplify.setText("  and simplify your billing and property management!\"\r\n");
-        simplify.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        simplify.setColumns(10);
-        simplify.setBounds(106, 424, 391, 42);
-        panel.add(simplify);
-
+        // Username input field
         username = new JTextField();
-        username.setForeground(new Color(183, 183, 47));
-        username.setBackground(new Color(240, 238, 226));
-        username.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        username.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        username.setForeground(new Color(60, 60, 60)); // Dark gray text
+        username.setBackground(Color.WHITE); // White background for input fields
         username.setText("Username");
-        username.setBounds(611, 195, 124, 42);
-        panel.add(username);
-        username.setColumns(10);
+        username.setBounds(250, 20, 300, 40);
+        username.setBorder(new LineBorder(new Color(183, 183, 47), 2, true)); // Accent border color
+        loginPanel.add(username);
 
-        password = new JTextField();
-        password.setForeground(new Color(183, 183, 47));
-        password.setBackground(new Color(240, 238, 226));
-        password.setText("Password");
-        password.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        password.setColumns(10);
-        password.setBounds(611, 267, 124, 42);
-        panel.add(password);
-
+        // Password input field
         passwordField = new JPasswordField();
-        passwordField.setBackground(new Color(240, 238, 226));
-        passwordField.setBounds(785, 267, 179, 43);
-        panel.add(passwordField);
+        passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        passwordField.setForeground(new Color(60, 60, 60)); // Dark gray text
+        passwordField.setBackground(Color.WHITE); // White background for input fields
+        passwordField.setBounds(250, 80, 300, 40);
+        passwordField.setBorder(new LineBorder(new Color(183, 183, 47), 2, true)); // Accent border color
+        loginPanel.add(passwordField);
 
-        textField = new JTextField();
-        textField.setBackground(new Color(240, 238, 226));
-        textField.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        textField.setColumns(10);
-        textField.setBounds(785, 195, 179, 42);
-        panel.add(textField);
+        // Show password checkbox
+        JCheckBox showPassword = new JCheckBox("Show Password");
+        showPassword.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        showPassword.setForeground(new Color(60, 60, 60)); // Dark gray text
+        showPassword.setBackground(new Color(245, 245, 245)); // Light gray background
+        showPassword.setBounds(250, 130, 150, 20);
+        loginPanel.add(showPassword);
 
-        JButton login = new JButton(" Log in ");
-        login.setForeground(new Color(0, 0, 0));
-        login.setBackground(new Color(183, 183, 47));
-        login.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        login.setBounds(705, 390, 141, 32);
-        panel.add(login);
-
-        JCheckBox showpassword = new JCheckBox("show password");
-        showpassword.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        showpassword.setBackground(new Color(240, 238, 226));
-        showpassword.setBounds(785, 333, 179, 32);
-        panel.add(showpassword);
+        // Login button
+        JButton loginButton = new JButton("Log In");
+        loginButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        loginButton.setForeground(Color.WHITE); // White text
+        loginButton.setBackground(new Color(183, 183, 47)); // Accent green-yellow background
+        loginButton.setBounds(250, 170, 300, 40);
+        loginButton.setBorder(new LineBorder(new Color(183, 183, 47), 2, true)); // Accent border color
+        loginButton.setOpaque(true); // Make button opaque for visible color
+        loginButton.setFocusPainted(false); // Remove focus border
+        loginButton.setBorderPainted(false); // Remove border highlight on focus
+        loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Change cursor on hover
+        loginPanel.add(loginButton);
 
         // Action listener for the login button
-        login.addActionListener(new ActionListener() {
+        loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String enteredUsername = textField.getText();
+                String enteredUsername = username.getText();
                 String enteredPassword = new String(passwordField.getPassword());
 
                 if (enteredUsername.equals(DUMMY_USERNAME) && enteredPassword.equals(DUMMY_PASSWORD)) {
@@ -164,9 +134,9 @@ public class Main extends JFrame {
         });
 
         // Action listener for the show password checkbox
-        showpassword.addActionListener(new ActionListener() {
+        showPassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (showpassword.isSelected()) {
+                if (showPassword.isSelected()) {
                     passwordField.setEchoChar((char) 0); // Show password
                 } else {
                     passwordField.setEchoChar('*'); // Hide password
@@ -174,21 +144,15 @@ public class Main extends JFrame {
             }
         });
 
-        contentPane.setLayout(null);
-    }
+        // Footer section
+        JPanel footerPanel = new JPanel();
+        footerPanel.setBackground(new Color(183, 183, 47)); // Accent color for footer
+        footerPanel.setBounds(0, 670, 1440, 50); // Positioned at the bottom of the frame
+        contentPane.add(footerPanel);
 
-    // Custom JPanel class for background image
-    class ImagePanel extends JPanel {
-        private Image backgroundImage;
-
-        public ImagePanel(Image image) {
-            this.backgroundImage = image;
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        }
+        JLabel footerLabel = new JLabel("© 2024 AVA HOMES - All rights reserved.");
+        footerLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        footerLabel.setForeground(Color.WHITE);
+        footerPanel.add(footerLabel);
     }
 }
