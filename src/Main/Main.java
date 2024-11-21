@@ -1,3 +1,5 @@
+package Main;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Color;
@@ -7,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
@@ -14,11 +17,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
+// Import your Homepage class
+ // Ensure this matches the actual package name of your Homepage class
+
 public class Main extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField WELCOME;
     private JTextField username;
     private JPasswordField passwordField;
     private JTextField textField;
@@ -62,29 +67,18 @@ public class Main extends JFrame {
         headerLabel.setForeground(Color.WHITE);
         headerPanel.add(headerLabel);
 
-        // Welcome text
-        WELCOME = new JTextField();
-        WELCOME.setFont(new Font("Segoe UI", Font.BOLD, 32));
-        WELCOME.setForeground(new Color(60, 60, 60)); // Soft dark gray text
-        WELCOME.setText("Welcome to AVA HOMES");
-        WELCOME.setBounds(200, 100, 400, 50);
-        WELCOME.setHorizontalAlignment(JTextField.CENTER);
-        WELCOME.setEditable(false);
-        contentPane.add(WELCOME);
-
         // Center panel for login form
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(null);
-        loginPanel.setBounds(320, 150, 800, 350); // Centering login panel
+        loginPanel.setBounds(319, 171, 800, 350); // Centering login panel
         contentPane.add(loginPanel);
 
         // Username input field
         username = new JTextField();
         username.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         username.setForeground(new Color(60, 60, 60)); // Dark gray text
-        username.setBackground(Color.WHITE); // White background for input fields
-        username.setText("Username");
-        username.setBounds(250, 20, 300, 40);
+        username.setBackground(Color.WHITE);
+        username.setBounds(250, 139, 300, 40);
         username.setBorder(new LineBorder(new Color(183, 183, 47), 2, true)); // Accent border color
         loginPanel.add(username);
 
@@ -93,7 +87,7 @@ public class Main extends JFrame {
         passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         passwordField.setForeground(new Color(60, 60, 60)); // Dark gray text
         passwordField.setBackground(Color.WHITE); // White background for input fields
-        passwordField.setBounds(250, 80, 300, 40);
+        passwordField.setBounds(250, 190, 300, 40);
         passwordField.setBorder(new LineBorder(new Color(183, 183, 47), 2, true)); // Accent border color
         loginPanel.add(passwordField);
 
@@ -101,8 +95,8 @@ public class Main extends JFrame {
         JCheckBox showPassword = new JCheckBox("Show Password");
         showPassword.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         showPassword.setForeground(new Color(60, 60, 60)); // Dark gray text
-        showPassword.setBackground(new Color(245, 245, 245)); // Light gray background
-        showPassword.setBounds(250, 130, 150, 20);
+        showPassword.setBackground(new Color(240, 240, 240)); // Light gray background
+        showPassword.setBounds(250, 237, 150, 20);
         loginPanel.add(showPassword);
 
         // Login button
@@ -110,13 +104,20 @@ public class Main extends JFrame {
         loginButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         loginButton.setForeground(Color.WHITE); // White text
         loginButton.setBackground(new Color(183, 183, 47)); // Accent green-yellow background
-        loginButton.setBounds(250, 170, 300, 40);
+        loginButton.setBounds(250, 264, 300, 40);
         loginButton.setBorder(new LineBorder(new Color(183, 183, 47), 2, true)); // Accent border color
         loginButton.setOpaque(true); // Make button opaque for visible color
         loginButton.setFocusPainted(false); // Remove focus border
         loginButton.setBorderPainted(false); // Remove border highlight on focus
         loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Change cursor on hover
         loginPanel.add(loginButton);
+        
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setBounds(302, 28, 190, 100);
+        loginPanel.add(lblNewLabel);
+        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        lblNewLabel.setIcon(logoIcon);
+        loginPanel.add(lblNewLabel);
 
         // Action listener for the login button
         loginButton.addActionListener(new ActionListener() {
@@ -126,7 +127,10 @@ public class Main extends JFrame {
 
                 if (enteredUsername.equals(DUMMY_USERNAME) && enteredPassword.equals(DUMMY_PASSWORD)) {
                     JOptionPane.showMessageDialog(null, "Login successful!");
-                    // Proceed to the next screen or action
+                    // Navigate to Homepage class
+                    homepage homepage = new homepage();
+                    homepage.setVisible(true);
+                    dispose(); // Close the login window
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid username or password. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                 }

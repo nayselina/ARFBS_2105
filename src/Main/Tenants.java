@@ -1,210 +1,265 @@
 package Main;
 
 import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.BorderLayout;
 
 public class Tenants extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Tenants frame = new Tenants();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                Tenants frame = new Tenants();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public Tenants() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1440, 752);
+    public Tenants() {
+        setTitle("Tenant Management System");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1440, 752); // Set size of the window
+        setLocationRelativeTo(null); // Center the window
 
-		// Content panel setup
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(240, 238, 226));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+        // Initialize the content panel
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(240, 238, 226));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(null);
+        setContentPane(contentPane);
 
-		// Left sidebar panel
-		JPanel sidebarPanel = new JPanel();
-		sidebarPanel.setBackground(new Color(255, 255, 255));
-		sidebarPanel.setBounds(0, 124, 251, 785);
-		contentPane.add(sidebarPanel);
-		sidebarPanel.setLayout(null);
+        // Sidebar panel 
+        JPanel sidebarPanel = new JPanel();
+        sidebarPanel.setBackground(new Color(255, 255, 255)); // White background color
+        sidebarPanel.setBounds(0, 122, 251, 602); // Adjusted height to fit content
+        sidebarPanel.setLayout(null);
+        contentPane.add(sidebarPanel);
 
-		// Navigation buttons in the sidebar
-		JButton btnHomepage = new JButton("Homepage");
-		btnHomepage.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnHomepage.setBounds(0, 58, 251, 58);
-		btnHomepage.setBackground(new Color(255, 255, 255));
-		btnHomepage.setForeground(new Color(0, 0, 0));
-		btnHomepage.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        dispose();
-		        homepage homepageFrame = new homepage();
-		        homepageFrame.setVisible(true);
-		    }
-		});
-		sidebarPanel.add(btnHomepage);
+        // Buttons in the sidebar
+        JButton btnDashboard = new JButton("Homepage");
+        btnDashboard.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnDashboard.setBounds(0, 58, 251, 58);
+        btnDashboard.setBackground(new Color(255, 255, 255));
+        btnDashboard.setForeground(new Color(0, 0, 0));
+        btnDashboard.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                homepage homepageFrame = new homepage();
+                homepageFrame.setVisible(true);
+            }
+        });
+        sidebarPanel.add(btnDashboard);
 
-		JButton btnApartments = new JButton("Apartments");
-		btnApartments.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnApartments.setBounds(0, 114, 251, 58);
-		btnApartments.setBackground(new Color(255, 255, 255));
-		btnApartments.setForeground(new Color(0, 0, 0));
-		btnApartments.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        dispose();
-		        Apartments apartmentsFrame = new Apartments();
-		        apartmentsFrame.setVisible(true);
-		    }
-		});
-		sidebarPanel.add(btnApartments);
+        JButton btnApartments = new JButton("Apartments");
+        btnApartments.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnApartments.setBounds(0, 114, 251, 58);
+        btnApartments.setBackground(new Color(255, 255, 255));
+        btnApartments.setForeground(new Color(0, 0, 0));
+        btnApartments.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Apartments apartmentsFrame = new Apartments();
+                apartmentsFrame.setVisible(true);
+            }
+        });
+        sidebarPanel.add(btnApartments);
 
-		JButton btnTenants = new JButton("Tenants");
-		btnTenants.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnTenants.setBounds(0, 170, 251, 58);
-		btnTenants.setBackground(new Color(255, 255, 255));
-		btnTenants.setForeground(new Color(0, 0, 0));
-		btnTenants.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        dispose();
-		        Tenants tenantsFrame = new Tenants();
-		        tenantsFrame.setVisible(true);
-		    }
-		});
-		sidebarPanel.add(btnTenants);
+        JButton btnTenants = new JButton("Tenants");
+        btnTenants.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnTenants.setBounds(0, 170, 251, 58);
+        btnTenants.setBackground(new Color(255, 255, 255));
+        btnTenants.setForeground(new Color(0, 0, 0));
+        btnTenants.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Tenants tenantsFrame = new Tenants();
+                tenantsFrame.setVisible(true);
+            }
+        });
+        sidebarPanel.add(btnTenants);
 
-		JButton btnBilling = new JButton("Billing");
-		btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnBilling.setBounds(0, 226, 251, 58);
-		sidebarPanel.add(btnBilling);
+        JButton btnBilling = new JButton("Billing");
+        btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnBilling.setBounds(0, 226, 251, 58); // Position on the sidebar
+        btnBilling.setBackground(new Color(255, 255, 255)); // White background
+        btnBilling.setForeground(new Color(0, 0, 0)); // Black text
+        btnBilling.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the current frame
+                Billing billingFrame = new Billing(); // Create an instance of the Billing frame
+                billingFrame.setVisible(true); // Open the Billing frame
+            }
+        });
+        sidebarPanel.add(btnBilling);
 
-		JButton btnReservation = new JButton("Reservations");
-    	btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
-    	btnReservation.setBounds(0, 283, 251, 58);
-    	btnReservation.setBackground(new Color(255, 255, 255));
-    	btnReservation.setForeground(new Color(0, 0, 0));
-    	btnReservation.addActionListener(new ActionListener() {
+        JButton btnReservation = new JButton("Reservations");
+        btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnReservation.setBounds(0, 283, 251, 58);
+        btnReservation.setBackground(new Color(255, 255, 255));
+        btnReservation.setForeground(new Color(0, 0, 0));
+        btnReservation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close the current Transactions frame
                 reservation reservationFrame = new reservation(); // Open the Customers frame
                 reservationFrame.setVisible(true); // Set the Customers frame visible
             }
         });
-    	sidebarPanel.add(btnReservation);
+        sidebarPanel.add(btnReservation);
 
-		JButton btnReports = new JButton("Reports");
-		btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnReports.setBounds(0, 340, 251, 58);
-		sidebarPanel.add(btnReports);
+        JButton btnReports = new JButton("Reports");
+        btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnReports.setBounds(0, 335, 251, 58); // Adjusting position in the sidebar
+        btnReports.setBackground(new Color(255, 255, 255)); // White background
+        btnReports.setForeground(new Color(0, 0, 0)); // Black text
+        btnReports.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the current frame
+                Reports reportsFrame = new Reports(); // Create an instance of the Reports frame
+                reportsFrame.setVisible(true); // Display the Reports frame
+            }
+        });
+        sidebarPanel.add(btnReports);
 
-		JButton btnSettings = new JButton("Settings");
-		btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnSettings.setBounds(0, 396, 251, 58);
-		sidebarPanel.add(btnSettings);
+        JButton btnSettings = new JButton("Settings");
+        btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnSettings.setBounds(0, 390, 251, 58);
+        btnSettings.setBackground(new Color(255, 255, 255)); // White background
+        btnSettings.setForeground(new Color(0, 0, 0)); // Black text
+        btnSettings.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the current frame
+                Settings settingsFrame = new Settings(); // Create an instance of the Settings frame
+                settingsFrame.setVisible(true); // Display the Settings frame
+            }
+        });
+        sidebarPanel.add(btnSettings);
 
-		// Panel at the top
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(183, 183, 47));
-		panel_1.setBounds(0, 0, 1443, 121);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+        // Header panel
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(new Color(183, 183, 47)); // Set header color
+        headerPanel.setBounds(0, 0, 1451, 122); // Set position and size for header
+        contentPane.add(headerPanel);
+        headerPanel.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(10, -16, 209, 162);
-		panel_1.add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\63906\\OneDrive\\Documents\\oop_project\\my_application\\src\\login\\1-removebg-preview.png"));
+        JLabel lblNewLabel = new JLabel();
+        lblNewLabel.setBounds(20, 10, 190, 100);
+        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        lblNewLabel.setIcon(logoIcon);
+        headerPanel.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(1254, 32, 48, 61);
-		panel_1.add(lblNewLabel_1);
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\63906\\Downloads\\bell.png"));
-		lblNewLabel_1.setForeground(new Color(0, 0, 0));
+        // Create the table data and model
+        String[] columnNames = {"ID", "Name", "Contact Number", "Email", "Unit", "Other Info"};
+        Object[][] data = {
+            {"", "", "", "", "", ""},
+            {"", "", "", "", "", ""}
+        };
 
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(1301, 44, 45, 39);
-		panel_1.add(lblNewLabel_2);
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\63906\\Downloads\\user.png"));
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setLayout(null);
-		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(309, 173, 1065, 517);
-		contentPane.add(panel_3);
-		
-		JLabel lblOverview = new JLabel("Overview");
-		lblOverview.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOverview.setForeground(Color.BLACK);
-		lblOverview.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblOverview.setBounds(10, 11, 130, 30);
-		panel_3.add(lblOverview);
-		
-		JLabel lblId = new JLabel("ID");
-		lblId.setHorizontalAlignment(SwingConstants.CENTER);
-		lblId.setForeground(Color.BLACK);
-		lblId.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblId.setBounds(68, 78, 80, 20);
-		panel_3.add(lblId);
-		
-		JLabel lblName = new JLabel("Name");
-		lblName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblName.setForeground(Color.BLACK);
-		lblName.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblName.setBounds(196, 73, 130, 30);
-		panel_3.add(lblName);
-		
-		JLabel lblContactNumber = new JLabel("Contact number");
-		lblContactNumber.setHorizontalAlignment(SwingConstants.CENTER);
-		lblContactNumber.setForeground(Color.BLACK);
-		lblContactNumber.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblContactNumber.setBounds(390, 73, 152, 30);
-		panel_3.add(lblContactNumber);
-		
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmail.setForeground(Color.BLACK);
-		lblEmail.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblEmail.setBounds(595, 73, 130, 30);
-		panel_3.add(lblEmail);
-		
-		JLabel lblUnit = new JLabel("Unit");
-		lblUnit.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUnit.setForeground(Color.BLACK);
-		lblUnit.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblUnit.setBounds(735, 73, 130, 30);
-		panel_3.add(lblUnit);
-		
-		JLabel lblOthers = new JLabel("Others");
-		lblOthers.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOthers.setForeground(Color.BLACK);
-		lblOthers.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblOthers.setBounds(875, 73, 130, 30);
-		panel_3.add(lblOthers);
-	}
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        table = new JTable(new DefaultTableModel(
+        	new Object[][] {
+        		{"", "", "", "", "", ""},
+        		{"", "", "", "", "", ""},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        		{null, null, null, null, null, null},
+        	},
+        	new String[] {
+        		"ID", "Name", "Contact Number", "Email", "Unit", "Other Info"
+        	}
+        ));
+
+        // Table Style
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        table.setRowHeight(40);
+        table.setShowHorizontalLines(false);
+        table.setShowVerticalLines(false);
+        table.setSelectionBackground(new Color(255, 230, 150));
+        table.setSelectionForeground(new Color(0, 0, 0));
+
+        // Alternating Row Colors
+        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (!isSelected) {
+                    c.setBackground(row % 2 == 0 ? new Color(245, 245, 245) : Color.WHITE);
+                }
+                setHorizontalAlignment(SwingConstants.CENTER); // Center align text
+                return c;
+            }
+        });
+
+        // Table Header Style
+        JTableHeader header = table.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        header.setBackground(new Color(247, 247, 231));
+        header.setForeground(Color.black);
+        header.setReorderingAllowed(false);
+
+        // Scroll Pane
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        contentPane.add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setBounds(302, 172, 1079, 514); // Set size and position of the table
+    }
 }

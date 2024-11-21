@@ -134,10 +134,20 @@ public class reservationbilling extends JFrame {
 		});
 		sidebarPanel.add(btnTenants);
 
-        JButton btnBilling = new JButton("Billing");
-        btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnBilling.setBounds(0, 226, 251, 58);
-        sidebarPanel.add(btnBilling);
+		JButton btnBilling = new JButton("Billing");
+		btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
+		btnBilling.setBounds(0, 226, 251, 58); // Position on the sidebar
+		btnBilling.setBackground(new Color(255, 255, 255)); // White background
+		btnBilling.setForeground(new Color(0, 0, 0)); // Black text
+		btnBilling.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        dispose(); // Close the current frame
+		        Billing billingFrame = new Billing(); // Create an instance of the Billing frame
+		        billingFrame.setVisible(true); // Open the Billing frame
+		    }
+		});
+		sidebarPanel.add(btnBilling);
+
 
         JButton btnReservation = new JButton("Reservations");
         btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
@@ -169,15 +179,34 @@ public class reservationbilling extends JFrame {
 
         contentPane.add(btnCompleteReservation); // Add the button to the content pane
 
-        JButton btnReports = new JButton("Reports");
-        btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnReports.setBounds(0, 340, 251, 58);
-        sidebarPanel.add(btnReports);
-
-        JButton btnSettings = new JButton("Settings");
+    	JButton btnReports = new JButton("Reports");
+    	btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
+    	btnReports.setBounds(0, 335, 251, 58); // Adjusting position in the sidebar
+    	btnReports.setBackground(new Color(255, 255, 255)); // White background
+    	btnReports.setForeground(new Color(0, 0, 0)); // Black text
+    	btnReports.addActionListener(new ActionListener() {
+    	    public void actionPerformed(ActionEvent e) {
+    	        dispose(); // Close the current frame
+    	        Reports reportsFrame = new Reports(); // Create an instance of the Reports frame
+    	        reportsFrame.setVisible(true); // Display the Reports frame
+    	    }
+    	});
+    	sidebarPanel.add(btnReports);
+    	
+    	JButton btnSettings = new JButton("Settings");
         btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnSettings.setBounds(0, 396, 251, 58);
-        sidebarPanel.add(btnSettings);
+        btnSettings.setBounds(0, 390, 251, 58);
+        btnSettings.setBackground(new Color(255, 255, 255)); // White background
+    	btnSettings.setForeground(new Color(0, 0, 0)); // Black text
+    	btnSettings.addActionListener(new ActionListener() {
+    	    public void actionPerformed(ActionEvent e) {
+    	        dispose(); // Close the current frame
+    	        Settings settingsFrame = new Settings(); // Create an instance of the Reports frame
+    	        settingsFrame.setVisible(true); // Display the Reports frame
+    	    }
+    	});
+    	sidebarPanel.add(btnSettings);
+
 
         // Top banner panel
         JPanel bannerPanel = new JPanel();
@@ -185,6 +214,12 @@ public class reservationbilling extends JFrame {
         bannerPanel.setBounds(0, 0, 1440, 122);
         contentPane.add(bannerPanel);
         bannerPanel.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setBounds(20, 10, 190, 100);
+        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        lblNewLabel.setIcon(logoIcon);
+        bannerPanel.add(lblNewLabel);
 
         JPanel panel_3 = new JPanel();
         panel_3.setLayout(null);

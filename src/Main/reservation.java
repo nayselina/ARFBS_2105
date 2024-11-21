@@ -3,8 +3,10 @@ package Main;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -63,12 +65,10 @@ public class reservation extends JFrame {
         btnHomepage.setBounds(0, 58, 251, 58);
         btnHomepage.setBackground(new Color(255, 255, 255));
         btnHomepage.setForeground(new Color(0, 0, 0));
-        btnHomepage.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                homepage homepageFrame = new homepage();
-                homepageFrame.setVisible(true);
-            }
+        btnHomepage.addActionListener(e -> {
+            dispose();
+            homepage homepageFrame = new homepage();
+            homepageFrame.setVisible(true);
         });
         sidebarPanel.add(btnHomepage);
 
@@ -78,33 +78,39 @@ public class reservation extends JFrame {
         btnApartments.setBounds(0, 114, 251, 58);
         btnApartments.setBackground(new Color(255, 255, 255));
         btnApartments.setForeground(new Color(0, 0, 0));
-        btnApartments.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                Apartments apartmentsFrame = new Apartments();
-                apartmentsFrame.setVisible(true);
-            }
+        btnApartments.addActionListener(e -> {
+            dispose();
+            Apartments apartmentsFrame = new Apartments();
+            apartmentsFrame.setVisible(true);
         });
         sidebarPanel.add(btnApartments);
 
+        // Tenants button
         JButton btnTenants = new JButton("Tenants");
-		btnTenants.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		btnTenants.setBounds(0, 170, 251, 58);
-		btnTenants.setBackground(new Color(255, 255, 255));
-		btnTenants.setForeground(new Color(0, 0, 0));
-		btnTenants.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        dispose();
-		        Tenants tenantsFrame = new Tenants();
-		        tenantsFrame.setVisible(true);
-		    }
-		});
-		sidebarPanel.add(btnTenants);
+        btnTenants.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnTenants.setBounds(0, 170, 251, 58);
+        btnTenants.setBackground(new Color(255, 255, 255));
+        btnTenants.setForeground(new Color(0, 0, 0));
+        btnTenants.addActionListener(e -> {
+            dispose();
+            Tenants tenantsFrame = new Tenants();
+            tenantsFrame.setVisible(true);
+        });
+        sidebarPanel.add(btnTenants);
 
         // Billing button
         JButton btnBilling = new JButton("Billing");
         btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnBilling.setBounds(0, 226, 251, 58);
+        btnBilling.setBounds(0, 226, 251, 58); // Position on the sidebar
+        btnBilling.setBackground(new Color(255, 255, 255)); // White background
+        btnBilling.setForeground(new Color(0, 0, 0)); // Black text
+        btnBilling.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the current frame
+                Billing billingFrame = new Billing(); // Create an instance of the Billing frame
+                billingFrame.setVisible(true); // Open the Billing frame
+            }
+        });
         sidebarPanel.add(btnBilling);
 
         // Reservations button (current page)
@@ -113,26 +119,36 @@ public class reservation extends JFrame {
         btnReservation.setBounds(0, 283, 251, 58);
         btnReservation.setBackground(new Color(255, 255, 255));
         btnReservation.setForeground(new Color(0, 0, 0));
-        btnReservation.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); 
-                reservation reservationFrame = new reservation(selectedUnitType, selectedPrice, selectedLeaseType);
-                reservationFrame.setVisible(true); 
-            }
-        });
         sidebarPanel.add(btnReservation);
 
         // Reports button
         JButton btnReports = new JButton("Reports");
         btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnReports.setBounds(0, 340, 251, 58);
+        btnReports.setBounds(0, 335, 251, 58);
+        btnReports.setBackground(new Color(255, 255, 255));
+        btnReports.setForeground(new Color(0, 0, 0));
+        btnReports.addActionListener(e -> {
+            dispose();
+            Reports reportsFrame = new Reports();
+            reportsFrame.setVisible(true);
+        });
         sidebarPanel.add(btnReports);
 
         // Settings button
         JButton btnSettings = new JButton("Settings");
         btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnSettings.setBounds(0, 396, 251, 58);
-        sidebarPanel.add(btnSettings);
+        btnSettings.setBounds(0, 390, 251, 58);
+        btnSettings.setBackground(new Color(255, 255, 255)); // White background
+    	btnSettings.setForeground(new Color(0, 0, 0)); // Black text
+    	btnSettings.addActionListener(new ActionListener() {
+    	    public void actionPerformed(ActionEvent e) {
+    	        dispose(); // Close the current frame
+    	        Settings settingsFrame = new Settings(); // Create an instance of the Reports frame
+    	        settingsFrame.setVisible(true); // Display the Reports frame
+    	    }
+    	});
+    	sidebarPanel.add(btnSettings);
+
 
         // Header panel
         JPanel headerPanel = new JPanel();
@@ -140,14 +156,11 @@ public class reservation extends JFrame {
         headerPanel.setBounds(0, 0, 1440, 122);
         contentPane.add(headerPanel);
         headerPanel.setLayout(null);
-
-        JLabel logoLabel = new JLabel("");
-        logoLabel.setBounds(10, -16, 209, 162);
-        headerPanel.add(logoLabel);
-        logoLabel = new JLabel(new ImageIcon(reservation.class.getResource("/logo/Untitled_design-removebg-preview.png")));
         
-        JLabel lblNewLabel = new JLabel("New label");
-        lblNewLabel.setBounds(56, 55, 61, 16);
+        JLabel lblNewLabel = new JLabel();
+        lblNewLabel.setBounds(20, 10, 190, 100);
+        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        lblNewLabel.setIcon(logoIcon);
         headerPanel.add(lblNewLabel);
 
         // Apartment selection panel
@@ -158,85 +171,66 @@ public class reservation extends JFrame {
         contentPane.add(selectionPanel);
 
         // Apartment types and images
-        addApartmentOption(selectionPanel, "Studio Apartment", "path/to/studio_apartment.png", 0);
-        addApartmentOption(selectionPanel, "Solo Suite", "path/to/solo_suite.png", 1);
-        addApartmentOption(selectionPanel, "Duo Deluxe", "path/to/duo_deluxe.png", 2);
-        addApartmentOption(selectionPanel, "Loft", "path/to/loft.png", 3);
-        addApartmentOption(selectionPanel, "Penthouse", "path/to/penthouse.png", 4);
+        studioLabel = createApartmentOption(selectionPanel, "Studio Apartment", "C:/Users/YOJ/git/2105_ARAFBS/src/images/studiooo.jpg", 0, 50);
+        soloLabel = createApartmentOption(selectionPanel, "Solo Suite", "C:/Users/YOJ/git/2105_ARAFBS/src/images/solo.jpg", 1, 260);
+        duoLabel = createApartmentOption(selectionPanel, "Duo Deluxe", "C:/Users/YOJ/git/2105_ARAFBS/src/images/duo.jpg", 2, 470);
+        loftLabel = createApartmentOption(selectionPanel, "Loft", "C:/Users/YOJ/git/2105_ARAFBS/src/images/loft.jpg", 3, 680);
+        penthouseLabel = createApartmentOption(selectionPanel, "Penthouse", "C:/Users/YOJ/git/2105_ARAFBS/src/images/penthouse.jpg", 4, 890);
+
+        // Highlight selected unit
+        highlightSelectedUnit();
 
         // Next button setup
         JButton nextButton = new JButton("Next");
         nextButton.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        nextButton.setBounds(650, 670, 150, 50);
+        nextButton.setBounds(700, 670, 150, 50);
         nextButton.setBackground(new Color(128, 128, 0));
         nextButton.setForeground(Color.WHITE);
-        nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Pass the selected unit details to reservationbilling
-                dispose();
-                reservationbilling billingFrame = new reservationbilling(selectedUnitType, selectedPrice, selectedLeaseType);
-                billingFrame.setVisible(true);
-            }
+        nextButton.addActionListener(e -> {
+            dispose();
+            reservationbilling billingFrame = new reservationbilling(selectedUnitType, selectedPrice, selectedLeaseType);
+            billingFrame.setVisible(true);
         });
         contentPane.add(nextButton);
     }
 
-    // Method to add apartment options with images and labels
-    private void addApartmentOption(JPanel panel, String type, String imagePath, int position) {
-        int xPosition = 50 + (position * 210);
-
-        // Apartment label
+    // Method to create apartment options with images and labels
+    private JLabel createApartmentOption(JPanel panel, String type, String imagePath, int position, int xPosition) {
         JLabel typeLabel = new JLabel(type);
         typeLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        typeLabel.setBounds(xPosition, 220, 200, 30);
+        typeLabel.setBounds(xPosition, 300, 200, 30);
         typeLabel.setHorizontalAlignment(JLabel.CENTER);
         typeLabel.setForeground(Color.BLACK);
         panel.add(typeLabel);
 
-        // If this is the selected unit type, highlight it
+        // Apartment image
+        ImageIcon icon = new ImageIcon(imagePath);
+        Image image = icon.getImage().getScaledInstance(200, 130, Image.SCALE_SMOOTH);  // Resize image to avoid cropping
+        icon = new ImageIcon(image);
+        JLabel imageLabel = new JLabel(icon);
+        imageLabel.setBounds(xPosition, 150, 200, 130); // Adjust bounds if needed
+        panel.add(imageLabel);
+
+        // Highlight the selected unit
         if (type.equals(selectedUnitType)) {
-            typeLabel.setForeground(new Color(183, 183, 47)); // Highlight color
-        } else {
-            typeLabel.setForeground(Color.BLACK); // Default color for non-selected types
+            typeLabel.setForeground(new Color (183,183,47));  // Highlight the selected unit in green
         }
 
-        // Assign reference based on apartment type
-        switch (type) {
-            case "Studio Apartment" -> {
-                studioLabel = typeLabel;
-                if (type.equals(selectedUnitType)) {
-                    selectedPrice = "$1,000";  // Fixed price for Studio
-                }
-            }
-            case "Solo Suite" -> {
-                soloLabel = typeLabel;
-                if (type.equals(selectedUnitType)) {
-                    selectedPrice = "$1,500";  // Fixed price for Solo Suite
-                }
-            }
-            case "Duo Deluxe" -> {
-                duoLabel = typeLabel;
-                if (type.equals(selectedUnitType)) {
-                    selectedPrice = "$2,000";  // Fixed price for Duo Deluxe
-                }
-            }
-            case "Loft" -> {
-                loftLabel = typeLabel;
-                if (type.equals(selectedUnitType)) {
-                    selectedPrice = "$2,500";  // Fixed price for Loft
-                }
-            }
-            case "Penthouse" -> {
-                penthouseLabel = typeLabel;
-                if (type.equals(selectedUnitType)) {
-                    selectedPrice = "$5,000";  // Fixed price for Penthouse
-                }
-            }
-        }
+        return typeLabel;
+    }
 
-        // If an apartment type is selected, update the label color
-        if (type.equals(selectedUnitType)) {
-            typeLabel.setForeground(new Color(183, 183, 47));  // Highlight the label when selected
+    // Method to highlight the selected unit
+    private void highlightSelectedUnit() {
+        if (selectedUnitType.equals("Studio Apartment")) {
+            studioLabel.setForeground(new Color (183,183,47));  // Highlight in green
+        } else if (selectedUnitType.equals("Solo Suite")) {
+            soloLabel.setForeground(new Color (183,183,47));  // Highlight in green
+        } else if (selectedUnitType.equals("Duo Deluxe")) {
+            duoLabel.setForeground(new Color (183,183,47));  // Highlight in green
+        } else if (selectedUnitType.equals("Loft")) {
+            loftLabel.setForeground(new Color (183,183,47));  // Highlight in green
+        } else if (selectedUnitType.equals("Penthouse")) {
+            penthouseLabel.setForeground(new Color (183,183,47));  // Highlight in green
         }
     }
 }
