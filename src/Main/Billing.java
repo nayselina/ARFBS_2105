@@ -166,7 +166,7 @@ public class Billing extends JFrame {
         String[] columnNames = {"ID", "Name", "Date", "Amount", "Due Date", "Status"};
 
         // Empty data for the table (blank object array)
-        Object[][] data = {}; // Empty data array, no rows initially
+        Object[][] data = new Object[10][6]; // Adjust as necessary
 
         // DefaultTableModel to bind data to the JTable
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
@@ -196,6 +196,10 @@ public class Billing extends JFrame {
 
         // Set small button size and font size
         JButton btnPrevious = new JButton("Previous");
+        btnPrevious.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnPrevious.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         btnPrevious.setBackground(new Color(183, 183, 47));
         btnPrevious.setForeground(Color.WHITE);

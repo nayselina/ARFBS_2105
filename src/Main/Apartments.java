@@ -1,6 +1,9 @@
 package Main;
 
 import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -81,10 +84,20 @@ public class Apartments extends JFrame {
 		});
 		sidebarPanel.add(btnTenants);
 
-        JButton btnBilling = new JButton("Billing");
-        btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnBilling.setBounds(0, 226, 251, 58);
-        sidebarPanel.add(btnBilling);
+		JButton btnBilling = new JButton("Billing");
+		btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
+		btnBilling.setBounds(0, 226, 251, 58); // Position on the sidebar
+		btnBilling.setBackground(new Color(255, 255, 255)); // White background
+		btnBilling.setForeground(new Color(0, 0, 0)); // Black text
+		btnBilling.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        dispose(); // Close the current frame
+		        Billing billingFrame = new Billing(); // Create an instance of the Billing frame
+		        billingFrame.setVisible(true); // Open the Billing frame
+		    }
+		});
+		sidebarPanel.add(btnBilling);
+
 
         JButton btnReservation = new JButton("Reservations");
         btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
@@ -100,15 +113,34 @@ public class Apartments extends JFrame {
         });
         sidebarPanel.add(btnReservation);
 
-        JButton btnReports = new JButton("Reports");
-        btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnReports.setBounds(0, 340, 251, 58);
-        sidebarPanel.add(btnReports);
+    	JButton btnReports = new JButton("Reports");
+    	btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
+    	btnReports.setBounds(0, 335, 251, 58); // Adjusting position in the sidebar
+    	btnReports.setBackground(new Color(255, 255, 255)); // White background
+    	btnReports.setForeground(new Color(0, 0, 0)); // Black text
+    	btnReports.addActionListener(new ActionListener() {
+    	    public void actionPerformed(ActionEvent e) {
+    	        dispose(); // Close the current frame
+    	        Reports reportsFrame = new Reports(); // Create an instance of the Reports frame
+    	        reportsFrame.setVisible(true); // Display the Reports frame
+    	    }
+    	});
+    	sidebarPanel.add(btnReports);
 
-        JButton btnSettings = new JButton("Settings");
+    	JButton btnSettings = new JButton("Settings");
         btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnSettings.setBounds(0, 396, 251, 58);
-        sidebarPanel.add(btnSettings);
+        btnSettings.setBounds(0, 390, 251, 58);
+        btnSettings.setBackground(new Color(255, 255, 255)); // White background
+    	btnSettings.setForeground(new Color(0, 0, 0)); // Black text
+    	btnSettings.addActionListener(new ActionListener() {
+    	    public void actionPerformed(ActionEvent e) {
+    	        dispose(); // Close the current frame
+    	        Settings settingsFrame = new Settings(); // Create an instance of the Reports frame
+    	        settingsFrame.setVisible(true); // Display the Reports frame
+    	    }
+    	});
+    	sidebarPanel.add(btnSettings);
+
 
         // Top banner panel
         JPanel bannerPanel = new JPanel();
@@ -116,6 +148,15 @@ public class Apartments extends JFrame {
         bannerPanel.setBounds(0, 0, 1451, 122);
         contentPane.add(bannerPanel);
         bannerPanel.setLayout(null);
+        
+        
+        
+        JLabel lblNewLabel = new JLabel();
+        lblNewLabel.setBounds(20, 10, 190, 100);
+        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        lblNewLabel.setIcon(logoIcon);
+        bannerPanel.add(lblNewLabel);
+        
 
         JLabel lblFindYourNextHome = new JLabel("Find Your Next Home");
         lblFindYourNextHome.setFont(new Font("Segoe UI", Font.BOLD, 30));
@@ -137,21 +178,37 @@ public class Apartments extends JFrame {
         // Price label (auto-updates based on unit type)
         priceLabel = new JLabel("Price: ");
         priceLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        priceLabel.setBounds(668, 249, 150, 40);
+        priceLabel.setBounds(854, 250, 150, 40);
         contentPane.add(priceLabel);
 
         // Dropdown for Lease types
         String[] leaseTypes = {"Student Lease", "Fixed Term", "Short Term", "Month to Month", "Corporate Lease"};
         JComboBox<String> leaseTypeDropdown = new JComboBox<>(leaseTypes);
         leaseTypeDropdown.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        leaseTypeDropdown.setBounds(300, 310, 200, 40);
+        leaseTypeDropdown.setBounds(593, 250, 200, 40);
         contentPane.add(leaseTypeDropdown);
 
         // "Done" button to go to Reservation Panel
         JButton doneButton = new JButton("Done");
         doneButton.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        doneButton.setBounds(300, 370, 100, 40);
+        doneButton.setBounds(1054, 250, 100, 40);
         contentPane.add(doneButton);
+        
+        JPanel panel_3 = new JPanel();
+        panel_3.setLayout(null);
+        panel_3.setBackground(Color.WHITE);
+        panel_3.setBounds(280, 134, 1117, 219);
+        contentPane.add(panel_3);
+        
+        JLabel lblNewLabel_6 = new JLabel("");
+        lblNewLabel_6.setIcon(new ImageIcon("C:\\Users\\63906\\Downloads\\pay.png"));
+        lblNewLabel_6.setBounds(29, 86, 65, 63);
+        panel_3.add(lblNewLabel_6);
+        
+        JLabel lblNewLabel_7 = new JLabel("");
+        lblNewLabel_7.setIcon(new ImageIcon("C:\\Users\\63906\\Downloads\\money.png"));
+        lblNewLabel_7.setBounds(29, 176, 99, 75);
+        panel_3.add(lblNewLabel_7);
 
         // Set price based on selected unit type
         unitTypeDropdown.addActionListener(new ActionListener() {
