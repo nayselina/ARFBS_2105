@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 public class Billing extends JFrame {
 
@@ -43,7 +45,7 @@ public class Billing extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-     // Sidebar panel 
+        // Sidebar panel
         JPanel sidebarPanel = new JPanel();
         sidebarPanel.setBackground(new Color(255, 255, 255)); // White background color
         sidebarPanel.setBounds(0, 124, 251, 600); // Adjusted height to fit content
@@ -66,11 +68,11 @@ public class Billing extends JFrame {
         btnTenants.setBounds(0, 171, 251, 58);
         sidebarPanel.add(btnTenants);
 
-        // Changed variable name for Billing button
-        JButton btnInvoice = new JButton("Billing");
-        btnInvoice.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnInvoice.setBounds(0, 227, 251, 58);
-        sidebarPanel.add(btnInvoice);
+        // Changed variable name to btnBilling
+        JButton btnBilling = new JButton("Billing");
+        btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        btnBilling.setBounds(0, 227, 251, 58);
+        sidebarPanel.add(btnBilling);
 
         JButton btnReservation = new JButton("Reservation");
         btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
@@ -87,26 +89,78 @@ public class Billing extends JFrame {
         btnSettings.setBounds(0, 390, 251, 58);
         sidebarPanel.add(btnSettings);
 
-
         // Header panel
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(new Color(183, 183, 47)); // Set header color
         headerPanel.setBounds(0, 0, 1451, 122); // Set position and size for header
         contentPane.add(headerPanel);
 
+        // Main panel for the billing form
+        JPanel billingPanel = new JPanel();
+        billingPanel.setLayout(new GridLayout(7, 2, 10, 10)); // 7 rows, 2 columns, spacing of 10px
+        billingPanel.setBounds(285, 184, 400, 430); // Position on the left side
+        billingPanel.setBackground(new Color(255, 255, 255)); // White background color
+        billingPanel.setBorder(BorderFactory.createTitledBorder("Billing Details")); // Change border title
+        contentPane.add(billingPanel);
+
+        // Add form fields for Billing Information (Right-aligned)
+        JLabel lblBillingID = new JLabel("Billing ID:");
+        lblBillingID.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        JTextField txtBillingID = new JTextField();
+        txtBillingID.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        billingPanel.add(lblBillingID);
+        billingPanel.add(txtBillingID);
+
+        JLabel lblName = new JLabel("Name:");
+        lblName.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        JTextField txtName = new JTextField();
+        txtName.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        billingPanel.add(lblName);
+        billingPanel.add(txtName);
+
+        JLabel lblDate = new JLabel("Billing Date:");
+        lblDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        JTextField txtDate = new JTextField();
+        txtDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        billingPanel.add(lblDate);
+        billingPanel.add(txtDate);
+
+        JLabel lblAmount = new JLabel("Amount:");
+        lblAmount.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        JTextField txtAmount = new JTextField();
+        txtAmount.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        billingPanel.add(lblAmount);
+        billingPanel.add(txtAmount);
+
+        JLabel lblDueDate = new JLabel("Due Date:");
+        lblDueDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        JTextField txtDueDate = new JTextField();
+        txtDueDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        billingPanel.add(lblDueDate);
+        billingPanel.add(txtDueDate);
+
+        JLabel lblStatus = new JLabel("Status:");
+        lblStatus.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        JTextField txtStatus = new JTextField();
+        txtStatus.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        billingPanel.add(lblStatus);
+        billingPanel.add(txtStatus);
+        billingPanel.add(new JLabel());
+
         // Main panel for the table and title
         JPanel tablePanel = new JPanel();
         tablePanel.setBackground(new Color(255, 255, 255)); // White background for the main content panel
-        tablePanel.setBounds(333, 186, 1055, 469); // Set position and size for the table panel
+        tablePanel.setBounds(714, 190, 636, 426); // Position on the right side (smaller width)
         contentPane.add(tablePanel);
         tablePanel.setLayout(null);
 
-        // Title label for the table section
-        JLabel titleLabel = new JLabel("Overview", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16)); // Set the font to Segoe UI
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); // Add padding to the label
-        titleLabel.setBounds(0, 0, 1055, 40); // Set position and size for title label
-        tablePanel.add(titleLabel);
+        // Add the icon next to the table title
+        ImageIcon icon = new ImageIcon("resources/icon.png"); // Path to your icon file
+        JLabel tableTitleLabel = new JLabel("Table Billing Information", icon, SwingConstants.CENTER);
+        tableTitleLabel.setBounds(0, 0, 636, 40);
+        tablePanel.add(tableTitleLabel);
+        tableTitleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16)); // Set the font to Segoe UI
+        tableTitleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
         // Column names for the table
         String[] columnNames = {"ID", "Name", "Date", "Amount", "Due Date", "Status"};
@@ -130,27 +184,43 @@ public class Billing extends JFrame {
 
         // Create a scroll pane to hold the table
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(10, 40, 1035, 380); // Set position and size for the scroll pane
+        scrollPane.setBounds(0, 40, 636, 380); // Resize the scroll pane (make it smaller)
         tablePanel.add(scrollPane);
 
-        // Add a "Refresh" button to reload the data
-        JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        btnRefresh.setBounds(10, 430, 150, 40);
-        btnRefresh.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Code to refresh or reload the data (currently just a placeholder)
-                System.out.println("Data refreshed");
-            }
-        });
-        tablePanel.add(btnRefresh);
-    }
+        // Add the pagination buttons with small size at bottom right
+        JPanel paginationPanel = new JPanel();
+        paginationPanel.setBackground(new Color(255, 255, 255));
+        paginationPanel.setBounds(714, 635, 636, 60); // Adjust the position at the bottom
+        paginationPanel.setLayout(new FlowLayout(FlowLayout.RIGHT)); // Align to the right
+        contentPane.add(paginationPanel);
 
-    // Method to create a button in the sidebar
-    private void createSidebarButton(JPanel panel, String text, int yPos) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        button.setBounds(0, yPos, 251, 58);
-        panel.add(button);
+        // Set small button size and font size
+        JButton btnPrevious = new JButton("Previous");
+        btnPrevious.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        btnPrevious.setBackground(new Color(183, 183, 47));
+        btnPrevious.setForeground(Color.WHITE);
+        btnPrevious.setPreferredSize(new java.awt.Dimension(80, 30)); // Set small button size
+        paginationPanel.add(btnPrevious);
+
+        JButton btnPage1 = new JButton("1");
+        btnPage1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        btnPage1.setBackground(new Color(183, 183, 47));
+        btnPage1.setForeground(Color.WHITE);
+        btnPage1.setPreferredSize(new java.awt.Dimension(40, 30)); // Set small button size
+        paginationPanel.add(btnPage1);
+
+        JButton btnPage2 = new JButton("2");
+        btnPage2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        btnPage2.setBackground(new Color(183, 183, 47));
+        btnPage2.setForeground(Color.WHITE);
+        btnPage2.setPreferredSize(new java.awt.Dimension(40, 30)); // Set small button size
+        paginationPanel.add(btnPage2);
+
+        JButton btnNext = new JButton("Next");
+        btnNext.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        btnNext.setBackground(new Color(183, 183, 47));
+        btnNext.setForeground(Color.WHITE);
+        btnNext.setPreferredSize(new java.awt.Dimension(80, 30)); // Set small button size
+        paginationPanel.add(btnNext);
     }
 }
