@@ -3,19 +3,30 @@ package Main;
 import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTable;
+
+import javax.swing.JScrollPane;
+
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
+import com.toedter.calendar.JDateChooser;  // Import JDateChooser
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import model.BillingModel;
 
 public class Billing extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
+    private JTable table;
 
     /**
      * Launch the application.
@@ -44,6 +55,7 @@ public class Billing extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        
 
         // Sidebar panel
         JPanel sidebarPanel = new JPanel();
@@ -84,6 +96,8 @@ public class Billing extends JFrame {
         btnReports.setBounds(0, 335, 251, 58);
         sidebarPanel.add(btnReports);
 
+        
+        
         JButton btnSettings = new JButton("Settings");
         btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
         btnSettings.setBounds(0, 390, 251, 58);
@@ -97,7 +111,6 @@ public class Billing extends JFrame {
 
         // Main panel for the billing form
         JPanel billingPanel = new JPanel();
-        billingPanel.setLayout(new GridLayout(7, 2, 10, 10)); // 7 rows, 2 columns, spacing of 10px
         billingPanel.setBounds(285, 184, 400, 430); // Position on the left side
         billingPanel.setBackground(new Color(255, 255, 255)); // White background color
         billingPanel.setBorder(BorderFactory.createTitledBorder("Billing Details")); // Change border title
@@ -105,47 +118,131 @@ public class Billing extends JFrame {
 
         // Add form fields for Billing Information (Right-aligned)
         JLabel lblBillingID = new JLabel("Billing ID:");
+        lblBillingID.setBounds(6, 18, 189, 49);
         lblBillingID.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         JTextField txtBillingID = new JTextField();
+        txtBillingID.setBounds(205, 18, 189, 49);
         txtBillingID.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        billingPanel.setLayout(null);
         billingPanel.add(lblBillingID);
         billingPanel.add(txtBillingID);
 
         JLabel lblName = new JLabel("Name:");
+        lblName.setBounds(6, 77, 189, 49);
         lblName.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         JTextField txtName = new JTextField();
+        txtName.setBounds(205, 77, 189, 49);
         txtName.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         billingPanel.add(lblName);
         billingPanel.add(txtName);
 
         JLabel lblDate = new JLabel("Billing Date:");
+        lblDate.setBounds(6, 136, 189, 49);
         lblDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        JTextField txtDate = new JTextField();
-        txtDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         billingPanel.add(lblDate);
-        billingPanel.add(txtDate);
+        
+     /* JTextField txtDate = new JTextField();
+        txtDate.setBounds(205, 136, 189, 49);
+        txtDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));  
+        billingPanel.add(txtDate);*/
+        
+        JDateChooser billingDateChooser = new JDateChooser();  // Create a JDateChooser for Billing Date
+        billingDateChooser.setBounds(205, 136, 189, 49);  // Set the bounds
+        billingDateChooser.setFont(new Font("Segoe UI", Font.PLAIN, 16));  // Set font
+        billingPanel.add(billingDateChooser);
+        
+        
+     
+       
 
         JLabel lblAmount = new JLabel("Amount:");
+        lblAmount.setBounds(6, 195, 189, 49);
         lblAmount.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         JTextField txtAmount = new JTextField();
+        txtAmount.setBounds(205, 195, 189, 49);
         txtAmount.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         billingPanel.add(lblAmount);
         billingPanel.add(txtAmount);
 
         JLabel lblDueDate = new JLabel("Due Date:");
+        lblDueDate.setBounds(6, 254, 189, 49);
         lblDueDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        JTextField txtDueDate = new JTextField();
-        txtDueDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         billingPanel.add(lblDueDate);
-        billingPanel.add(txtDueDate);
+        
+        JDateChooser dueDateChooser = new JDateChooser();
+        dueDateChooser.setBounds(205, 254, 189, 49);
+        dueDateChooser.setFont(new Font("Segoe UI", Font.PLAIN, 16));;
+        billingPanel.add(dueDateChooser);
+        
+    /*    JTextField txtDueDate = new JTextField();
+        txtDueDate.setBounds(205, 254, 189, 49);
+        txtDueDate.setFont(new Font("Segoe UI", Font.PLAIN, 18));;
+        billingPanel.add(txtDueDate);    */
 
         JLabel lblStatus = new JLabel("Status:");
+        lblStatus.setBounds(6, 313, 189, 49);
         lblStatus.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        JTextField txtStatus = new JTextField();
-        txtStatus.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         billingPanel.add(lblStatus);
-        billingPanel.add(txtStatus);
-        billingPanel.add(new JLabel());
+        
+        JComboBox comboBoxStatus = new JComboBox();
+        comboBoxStatus.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        comboBoxStatus.setModel(new DefaultComboBoxModel(new String[] {"", "Paid", "Unpaid", "Partially Paid"}));
+        comboBoxStatus.setBounds(205, 313, 189, 49);
+        billingPanel.add(comboBoxStatus);
+        JLabel label = new JLabel();
+        label.setBounds(6, 372, 189, 49);
+        billingPanel.add(label);
+        
+        
+        
+        JButton btnSubmit = new JButton("Submit");
+        btnSubmit.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String strBillingID = txtBillingID.getText();
+        		String name = txtName.getText();
+        		String strAmount = txtAmount.getText();
+                String status = comboBoxStatus.getSelectedItem().toString();
+
+
+                Date billingDate = billingDateChooser.getDate();
+                String strBillingDate = null;
+
+                if (billingDate != null) {
+                    // Format the date to yyyy-MM-dd
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    strBillingDate = sdf.format(billingDate);  // Converts the Date object to a string in the desired format
+                }
+                
+                Date dueDate = dueDateChooser.getDate();
+                String strDueDate = null;
+
+                if (dueDate != null) {
+                    // Format the date to yyyy-MM-dd
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    strDueDate = sdf.format(dueDate);  // Converts the Date object to a string in the desired format
+                }
+                
+                DatabaseConnection logic = new DatabaseConnection();
+                String result = logic.saveUserData(strBillingID, name, strBillingDate, strAmount, strDueDate, status);  // Pass the birthday
+
+                // Display success or error message based on result
+                if (result.equals("Billing details saved successfully.")) {
+                    JOptionPane.showMessageDialog(Billing.this,
+                            result,  // Success message
+                            "Success", JOptionPane.INFORMATION_MESSAGE); // Show as Information
+                } else {
+                    JOptionPane.showMessageDialog(Billing.this,
+                            result,  // Error or failure message
+                            "Error", JOptionPane.ERROR_MESSAGE);  // Show as Error
+                }
+
+          
+            }
+        });
+        btnSubmit.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        btnSubmit.setBounds(284, 385, 110, 36);
+        billingPanel.add(btnSubmit);
+        
 
         // Main panel for the table and title
         JPanel tablePanel = new JPanel();
@@ -157,35 +254,34 @@ public class Billing extends JFrame {
         // Add the icon next to the table title
         ImageIcon icon = new ImageIcon("resources/icon.png"); // Path to your icon file
         JLabel tableTitleLabel = new JLabel("Table Billing Information", icon, SwingConstants.CENTER);
-        tableTitleLabel.setBounds(0, 0, 636, 40);
+        tableTitleLabel.setBounds(209, 0, 233, 42);
         tablePanel.add(tableTitleLabel);
         tableTitleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16)); // Set the font to Segoe UI
         tableTitleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-
-        // Column names for the table
-        String[] columnNames = {"ID", "Name", "Date", "Amount", "Due Date", "Status"};
-
-        // Empty data for the table (blank object array)
-        Object[][] data = new Object[10][6]; // Adjust as necessary
-
-        // DefaultTableModel to bind data to the JTable
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        JTable table = new JTable(model);
-
-        // Increase font size for the entire table
-        table.setFont(new Font("Segoe UI", Font.PLAIN, 18));  // Set font size to 18
-
-        // Set row height for better appearance
-        table.setRowHeight(30);
-
-        // Adjust the font size for the table header
-        JTableHeader header = table.getTableHeader();
-        header.setFont(new Font("Segoe UI", Font.BOLD, 18)); // Set header font size
-
-        // Create a scroll pane to hold the table
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 40, 636, 380); // Resize the scroll pane (make it smaller)
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(0, 51, 636, 375);
         tablePanel.add(scrollPane);
+        
+        table = new JTable();
+        table.setModel(new DefaultTableModel(
+        	new Object[][] {},
+        	new String[] {
+        		"Billing ID", "Name", "Billing Date", "Amount", "Due Date", "Status"
+        	}
+        ));
+        scrollPane.setViewportView(table);
+        
+        JButton btnRefresh = new JButton("REFRESH\r\n");
+        btnRefresh.setBackground(new Color(183, 183, 47));
+        btnRefresh.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		loadBillingData();
+        	}
+        });
+        btnRefresh.setBounds(537, 8, 89, 32);
+        tablePanel.add(btnRefresh);
+  
 
         // Add the pagination buttons with small size at bottom right
         JPanel paginationPanel = new JPanel();
@@ -193,6 +289,8 @@ public class Billing extends JFrame {
         paginationPanel.setBounds(714, 635, 636, 60); // Adjust the position at the bottom
         paginationPanel.setLayout(new FlowLayout(FlowLayout.RIGHT)); // Align to the right
         contentPane.add(paginationPanel);
+        
+        
 
         // Set small button size and font size
         JButton btnPrevious = new JButton("Previous");
@@ -226,5 +324,30 @@ public class Billing extends JFrame {
         btnNext.setForeground(Color.WHITE);
         btnNext.setPreferredSize(new java.awt.Dimension(80, 30)); // Set small button size
         paginationPanel.add(btnNext);
+        
+        loadBillingData();
+        
     }
+    
+    private void loadBillingData() {
+        DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+        List<BillingModel> billingList = dbConnection.getBillingData();
+        
+        // Create a model for the table
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        
+        model.setRowCount(0);
+        
+        // Add student data to the table
+        for (BillingModel billing : billingList) {
+            model.addRow(new Object[] {
+                billing.getBillingID(),
+                billing.getName(),
+                billing.getBillingDate(),
+                billing.getAmount(),
+                billing.getDueDate(),
+                billing.getStatus()
+            });
+        }
+    }   
 }
