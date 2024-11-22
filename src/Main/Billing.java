@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import model.BillingModel;
+import Model.BillingModel;
 
 public class Billing extends JFrame {
 
@@ -55,6 +55,7 @@ public class Billing extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        setLocationRelativeTo(null);
         
 
         // Sidebar panel
@@ -108,6 +109,8 @@ public class Billing extends JFrame {
         headerPanel.setBackground(new Color(183, 183, 47)); // Set header color
         headerPanel.setBounds(0, 0, 1451, 122); // Set position and size for header
         contentPane.add(headerPanel);
+        
+        
 
         // Main panel for the billing form
         JPanel billingPanel = new JPanel();

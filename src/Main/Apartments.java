@@ -26,6 +26,7 @@ public class Apartments extends JFrame {
         setTitle("Apartment Rental and Billing System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1440, 752);
+        setLocationRelativeTo(null);
 
         // Content panel setup
         contentPane = new JPanel();
@@ -153,7 +154,7 @@ public class Apartments extends JFrame {
         
         JLabel lblNewLabel = new JLabel();
         lblNewLabel.setBounds(20, 10, 190, 100);
-        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        ImageIcon logoIcon = new ImageIcon("src/images/logo.png"); // Provide the correct path to your logo image
         lblNewLabel.setIcon(logoIcon);
         bannerPanel.add(lblNewLabel);
         

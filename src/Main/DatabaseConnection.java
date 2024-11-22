@@ -1,6 +1,7 @@
 package Main;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
-import model.BillingModel;
+import Model.BillingModel;
 
 import java.sql.*;
 import java.util.ArrayList;

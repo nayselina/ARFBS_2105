@@ -59,6 +59,7 @@ public class reservationbilling extends JFrame {
     public reservationbilling(String selectedUnitType, String price, String leaseType) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1440, 752);
+        setLocationRelativeTo(null);
 
         // Content panel setup
         contentPane = new JPanel();
@@ -66,6 +67,7 @@ public class reservationbilling extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        
 
         // Debugging: Print the values to check if they are correct
         System.out.println("Selected Unit Type: " + selectedUnitType);

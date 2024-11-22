@@ -41,6 +41,7 @@ public class reservation extends JFrame {
         setTitle("Reservation");
         setSize(1440, 752);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         this.selectedUnitType = selectedUnitType.isEmpty() ? "" : selectedUnitType;  // No default unit type
         this.selectedPrice = selectedPrice.isEmpty() ? "" : selectedPrice;  // No default price
@@ -159,7 +160,7 @@ public class reservation extends JFrame {
         
         JLabel lblNewLabel = new JLabel();
         lblNewLabel.setBounds(20, 10, 190, 100);
-        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        ImageIcon logoIcon = new ImageIcon("src/images/logo.png"); // Provide the correct path to your logo image
         lblNewLabel.setIcon(logoIcon);
         headerPanel.add(lblNewLabel);
 
@@ -171,11 +172,11 @@ public class reservation extends JFrame {
         contentPane.add(selectionPanel);
 
         // Apartment types and images
-        studioLabel = createApartmentOption(selectionPanel, "Studio Apartment", "C:/Users/YOJ/git/2105_ARAFBS/src/images/studiooo.jpg", 0, 50);
-        soloLabel = createApartmentOption(selectionPanel, "Solo Suite", "C:/Users/YOJ/git/2105_ARAFBS/src/images/solo.jpg", 1, 260);
-        duoLabel = createApartmentOption(selectionPanel, "Duo Deluxe", "C:/Users/YOJ/git/2105_ARAFBS/src/images/duo.jpg", 2, 470);
-        loftLabel = createApartmentOption(selectionPanel, "Loft", "C:/Users/YOJ/git/2105_ARAFBS/src/images/loft.jpg", 3, 680);
-        penthouseLabel = createApartmentOption(selectionPanel, "Penthouse", "C:/Users/YOJ/git/2105_ARAFBS/src/images/penthouse.jpg", 4, 890);
+        studioLabel = createApartmentOption(selectionPanel, "Studio Apartment", "src/images/studiooo.jpg", 0, 50);
+        soloLabel = createApartmentOption(selectionPanel, "Solo Suite", "src/images/solo.jpg", 1, 260);
+        duoLabel = createApartmentOption(selectionPanel, "Duo Deluxe", "src/images/duo.jpg", 2, 470);
+        loftLabel = createApartmentOption(selectionPanel, "Loft", "src/images/loft.jpg", 3, 680);
+        penthouseLabel = createApartmentOption(selectionPanel, "Penthouse", "src/images/penthouse.jpg", 4, 890);
 
         // Highlight selected unit
         highlightSelectedUnit();

@@ -94,8 +94,10 @@ public class Reports extends JFrame {
         JLabel logoLabel = new JLabel();
         ImageIcon logoIcon = new ImageIcon("src/images/logo.png"); // Adjust the path as necessary
         logoLabel.setIcon(logoIcon);
-        logoLabel.setBounds(1050, 10, 100, 100);
+        logoLabel.setBounds(20, 10, 190, 100);
         headerPanel.add(logoLabel);
+        
+       
 
         // Filters Panel
         JPanel filtersPanel = new JPanel();

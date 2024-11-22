@@ -57,6 +57,7 @@ public class homepage extends JFrame {
         setTitle("Apartment Rental and Billing System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1440, 752); // Fixed size
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(new Color(240, 238, 226));
@@ -74,7 +75,7 @@ public class homepage extends JFrame {
      // Assuming you have a headerPanel where the logo is to be placed
         JLabel lblNewLabel = new JLabel();
         lblNewLabel.setBounds(20, 10, 190, 100); // Adjust these bounds according to your logo size and header layout
-        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        ImageIcon logoIcon = new ImageIcon("src/images/logo.png"); // Provide the correct path to your logo image
         lblNewLabel.setIcon(logoIcon);
         headerPanel.add(lblNewLabel);
 

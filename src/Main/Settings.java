@@ -16,6 +16,7 @@ public class Settings extends JFrame {
         setTitle("Settings");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1440, 752); // Fixed size
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(new Color(240, 238, 226));
@@ -32,7 +33,7 @@ public class Settings extends JFrame {
         
         JLabel lblNewLabel = new JLabel("New label");
         lblNewLabel.setBounds(20, 10, 190, 100);
-        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        ImageIcon logoIcon = new ImageIcon("src/images/logo.png"); // Provide the correct path to your logo image
         lblNewLabel.setIcon(logoIcon);
         headerPanel.add(lblNewLabel);
 

@@ -54,6 +54,7 @@ public class Main extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        setLocationRelativeTo(null);
 
         // Header section
         JPanel headerPanel = new JPanel();
@@ -115,7 +116,7 @@ public class Main extends JFrame {
         JLabel lblNewLabel = new JLabel("New label");
         lblNewLabel.setBounds(302, 28, 190, 100);
         loginPanel.add(lblNewLabel);
-        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
+        ImageIcon logoIcon = new ImageIcon("src/images/logo.png"); // Provide the correct path to your logo image
         lblNewLabel.setIcon(logoIcon);
         loginPanel.add(lblNewLabel);
 
