@@ -2,264 +2,272 @@ package Main;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import componentsUI.Header;
+import componentsUI.RoundedButton;
+import componentsUI.FrameDragUtility;
+import componentsUI.RoundedPanel;
+import componentsUI.SidebarPanel;
+import componentsUI.BackgroundPanel;
+
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.BorderLayout;
+import java.awt.Cursor;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Tenants extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private JTable table;
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private BackgroundPanel photoPanel;
+	private JTable tableTenants;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                Tenants frame = new Tenants();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tenants frame = new Tenants();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-    public Tenants() {
-        setTitle("Tenant Management System");
+	/**
+	 * Create the frame.
+	 */
+	public Tenants() {
+		setTitle("Apartment Rentals and Facilities Billing System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1440, 752); // Set size of the window
+        setBounds(100, 100, 1300, 800); // Fixed size
         setLocationRelativeTo(null); // Center the window
+        setUndecorated(true); // Remove the border
+        
+        new FrameDragUtility(this);
 
-        // Initialize the content panel
         contentPane = new JPanel();
         contentPane.setBackground(new Color(240, 238, 226));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(null);
         setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        Header header = new Header(this);
+        header.setBounds(0, 0, 1300, 26);
+        getContentPane().add(header);
+        
+        SidebarPanel sidebar = new SidebarPanel(this, "Tenants");
+        sidebar.setBounds(0, 129, 251, 671);
+        getContentPane().add(sidebar);
+        
+        RoundedPanel mainPanel = new RoundedPanel(30);
+        mainPanel.setBounds(301, 76, 949, 724);
+        mainPanel.setBackground(Color.WHITE);
+        mainPanel.setLayout(null); // Absolute positioning
+        contentPane.add(mainPanel);
+        
+        photoPanel = new BackgroundPanel("/images/interior1.png");
+        photoPanel.setBackground(Color.RED);
+        photoPanel.setBounds(251, 26, 1049, 774);
+        photoPanel.setLayout(null); // Absolute positioning
+        contentPane.add(photoPanel);
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int frameHeight = getHeight(); // Get the new frame height
+                int frameWidth = getWidth();
+                photoPanel.setBounds(300, 26, frameWidth - 300, frameHeight - 26); // Adjust sidebarPanel height
 
-        // Sidebar panel 
-        JPanel sidebarPanel = new JPanel();
-        sidebarPanel.setBackground(new Color(255, 255, 255)); // White background color
-        sidebarPanel.setBounds(0, 122, 251, 602); // Adjusted height to fit content
-        sidebarPanel.setLayout(null);
-        contentPane.add(sidebarPanel);
-
-        // Buttons in the sidebar
-        JButton btnDashboard = new JButton("Homepage");
-        btnDashboard.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnDashboard.setBounds(0, 58, 251, 58);
-        btnDashboard.setBackground(new Color(255, 255, 255));
-        btnDashboard.setForeground(new Color(0, 0, 0));
-        btnDashboard.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                homepage homepageFrame = new homepage();
-                homepageFrame.setVisible(true);
             }
-        });
-        sidebarPanel.add(btnDashboard);
-
-        JButton btnApartments = new JButton("Apartments");
-        btnApartments.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnApartments.setBounds(0, 114, 251, 58);
-        btnApartments.setBackground(new Color(255, 255, 255));
-        btnApartments.setForeground(new Color(0, 0, 0));
-        btnApartments.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                Apartments apartmentsFrame = new Apartments();
-                apartmentsFrame.setVisible(true);
-            }
-        });
-        sidebarPanel.add(btnApartments);
-
-        JButton btnTenants = new JButton("Tenants");
-        btnTenants.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnTenants.setBounds(0, 170, 251, 58);
-        btnTenants.setBackground(new Color(255, 255, 255));
-        btnTenants.setForeground(new Color(0, 0, 0));
-        btnTenants.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                Tenants tenantsFrame = new Tenants();
-                tenantsFrame.setVisible(true);
-            }
-        });
-        sidebarPanel.add(btnTenants);
-
-        JButton btnBilling = new JButton("Billing");
-        btnBilling.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnBilling.setBounds(0, 226, 251, 58); // Position on the sidebar
-        btnBilling.setBackground(new Color(255, 255, 255)); // White background
-        btnBilling.setForeground(new Color(0, 0, 0)); // Black text
-        btnBilling.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the current frame
-                Billing billingFrame = new Billing(); // Create an instance of the Billing frame
-                billingFrame.setVisible(true); // Open the Billing frame
-            }
-        });
-        sidebarPanel.add(btnBilling);
-
-        JButton btnReservation = new JButton("Reservations");
-        btnReservation.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnReservation.setBounds(0, 283, 251, 58);
-        btnReservation.setBackground(new Color(255, 255, 255));
-        btnReservation.setForeground(new Color(0, 0, 0));
-        btnReservation.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the current Transactions frame
-                reservation reservationFrame = new reservation(); // Open the Customers frame
-                reservationFrame.setVisible(true); // Set the Customers frame visible
-            }
-        });
-        sidebarPanel.add(btnReservation);
-
-        JButton btnReports = new JButton("Reports");
-        btnReports.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnReports.setBounds(0, 335, 251, 58); // Adjusting position in the sidebar
-        btnReports.setBackground(new Color(255, 255, 255)); // White background
-        btnReports.setForeground(new Color(0, 0, 0)); // Black text
-        btnReports.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the current frame
-                Reports reportsFrame = new Reports(); // Create an instance of the Reports frame
-                reportsFrame.setVisible(true); // Display the Reports frame
-            }
-        });
-        sidebarPanel.add(btnReports);
-
-        JButton btnSettings = new JButton("Settings");
-        btnSettings.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        btnSettings.setBounds(0, 390, 251, 58);
-        btnSettings.setBackground(new Color(255, 255, 255)); // White background
-        btnSettings.setForeground(new Color(0, 0, 0)); // Black text
-        btnSettings.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the current frame
-                Settings settingsFrame = new Settings(); // Create an instance of the Settings frame
-                settingsFrame.setVisible(true); // Display the Settings frame
-            }
-        });
-        sidebarPanel.add(btnSettings);
-
-        // Header panel
-        JPanel headerPanel = new JPanel();
-        headerPanel.setBackground(new Color(183, 183, 47)); // Set header color
-        headerPanel.setBounds(0, 0, 1451, 122); // Set position and size for header
-        contentPane.add(headerPanel);
-        headerPanel.setLayout(null);
-
-        JLabel lblNewLabel = new JLabel();
-        lblNewLabel.setBounds(20, 10, 190, 100);
-        ImageIcon logoIcon = new ImageIcon("C:/Users/YOJ/git/2105_ARAFBS/src/images/logo.png"); // Provide the correct path to your logo image
-        lblNewLabel.setIcon(logoIcon);
-        headerPanel.add(lblNewLabel);
-
-        // Create the table data and model
-        String[] columnNames = {"ID", "Name", "Contact Number", "Email", "Unit", "Other Info"};
-        Object[][] data = {
-            {"", "", "", "", "", ""},
-            {"", "", "", "", "", ""}
-        };
-
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        table = new JTable(new DefaultTableModel(
+        });  
+        
+        JPanel stPanel = new JPanel();
+        stPanel.setBackground(Color.LIGHT_GRAY);
+        stPanel.setBounds(0, 61, 949, 663);
+        mainPanel.add(stPanel);
+        stPanel.setLayout(null);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBackground(Color.WHITE);
+        scrollPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));  // for empty border
+        scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        scrollPane.setBounds(0, 0, 949, 663);
+        stPanel.add(scrollPane);
+        
+        tableTenants = new JTable();
+        tableTenants.setSelectionBackground(new Color(255, 230, 150));
+        
+        tableTenants.setRowHeight(30);
+        tableTenants.setShowVerticalLines(false);
+        tableTenants.setShowHorizontalLines(false);
+        tableTenants.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        tableTenants.setModel(new DefaultTableModel(
         	new Object[][] {
-        		{"", "", "", "", "", ""},
-        		{"", "", "", "", "", ""},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
-        		{null, null, null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
+        		{null, null, null, null},
         	},
         	new String[] {
-        		"ID", "Name", "Contact Number", "Email", "Unit", "Other Info"
+        		"Tenant ID", "Tenant Name", "Unit Rented", ""
         	}
         ));
-
-        // Table Style
-        table.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        table.setRowHeight(40);
-        table.setShowHorizontalLines(false);
-        table.setShowVerticalLines(false);
-        table.setSelectionBackground(new Color(255, 230, 150));
-        table.setSelectionForeground(new Color(0, 0, 0));
-
-        // Alternating Row Colors
-        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        scrollPane.setViewportView(tableTenants);
+        
+        tableTenants.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (!isSelected) {
-                    c.setBackground(row % 2 == 0 ? new Color(245, 245, 245) : Color.WHITE);
+                    c.setBackground(row % 2 == 0 ? Color.WHITE : new Color(240, 238, 226) );
                 }
                 setHorizontalAlignment(SwingConstants.CENTER); // Center align text
                 return c;
             }
         });
+        
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int frameHeight = getHeight(); // Get the new frame height
+                int frameWidth = getWidth();
+                stPanel.setBounds(0, 76, frameWidth - 401, frameHeight - 76);
+                scrollPane.setBounds(0, 0, frameWidth - 401, frameHeight - 76); 
+                tableTenants.setBounds(0, 0, frameWidth - 401, frameHeight - 76); 
+
+            }
+        });  
+        
 
         // Table Header Style
-        JTableHeader header = table.getTableHeader();
-        header.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        header.setBackground(new Color(247, 247, 231));
-        header.setForeground(Color.black);
-        header.setReorderingAllowed(false);
+        JTableHeader tblHeader = tableTenants.getTableHeader();
+        tblHeader.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        tblHeader.setBackground(new Color(247, 247, 231));
+        tblHeader.setForeground(Color.black);
+        tblHeader.setReorderingAllowed(false);         
+        
+        JLabel lblTenants = new JLabel("Tenants");
+        lblTenants.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        lblTenants.setBounds(15, 11, 265, 35);
+        mainPanel.add(lblTenants);
+        
+      //  JButton btnAddTenant = new JButton("Add Tenant");
+        RoundedButton btnAddTenant = new RoundedButton("Add Tenant", 15);
+        btnAddTenant.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		AddTenantDialog addTenantDialog = new AddTenantDialog();
+                
+                // Set modal to block other windows while this dialog is open
+                addTenantDialog.setModal(true);
+                
+                // Display the dialog
+                addTenantDialog.setVisible(true);
+        	}
+        });
+        btnAddTenant.setForeground(Color.WHITE);
+        btnAddTenant.setBorderPainted(false);
+        btnAddTenant.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        btnAddTenant.setBackground(new Color(183, 183, 47));
+        btnAddTenant.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnAddTenant.setBounds(726, 15, 100, 30);
+        mainPanel.add(btnAddTenant);
+        
+     //   JButton btnRefresh = new JButton("Refresh");
+        RoundedButton btnRefresh = new RoundedButton("Refresh", 15);
+        btnRefresh.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
+        btnRefresh.setForeground(Color.WHITE);
+        btnRefresh.setBorderPainted(false);
+        btnRefresh.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        btnRefresh.setBackground(new Color(183, 183, 47));
+        btnRefresh.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnRefresh.setBounds(840, 15, 80, 30);
+        mainPanel.add(btnRefresh);
+        
+        mainPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int frameWidth = mainPanel.getWidth();
+                btnAddTenant.setBounds(frameWidth - 215, 20, 100, 40); // Adjust sidebarPanel height
+                btnRefresh.setBounds(frameWidth - 100, 20, 80, 40); // Adjust sidebarPanel height
 
-        // Scroll Pane
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        contentPane.add(scrollPane, BorderLayout.CENTER);
-        scrollPane.setBounds(302, 172, 1079, 514); // Set size and position of the table
-    }
+
+            }
+        });  
+        
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int frameHeight = getHeight(); // Get the new frame height
+                int frameWidth = getWidth();
+                mainPanel.setBounds(351, 76, frameWidth - 401, frameHeight - 76); // Adjust sidebarPanel height
+
+            }
+        });  
+        
+    /*    this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int frameHeight = getHeight(); // Get the new frame height
+                int frameWidth = getWidth();
+                mainPanel.setBounds(401, 126, frameWidth - 451, frameHeight - 123); // Adjust sidebarPanel height
+
+            }
+        });  */
+	}
 }
